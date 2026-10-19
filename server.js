@@ -17,7 +17,23 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB
-connectDB();
+connectDB().catch(err => console.warn('Initial DB connect attempt:', err.message));
+
+// Ensure DB connection is established for API requests (Vercel Serverless)
+app.use(async (req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    try {
+      await connectDB();
+    } catch (err) {
+      console.error('Database connection error in middleware:', err.message);
+      return res.status(503).json({
+        success: false,
+        message: 'Database connection failed. Please ensure MongoDB Atlas Network Access allows 0.0.0.0/0.'
+      });
+    }
+  }
+  next();
+});
 
 // Security Middlewares
 app.use(
