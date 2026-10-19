@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+// Globally disable command buffering so operations fail fast if not connected
+mongoose.set('bufferCommands', false);
+
 /**
  * Global cache for Mongoose connection in Serverless environments (Vercel)
  */
@@ -16,14 +19,21 @@ const connectDB = async () => {
     throw new Error('MONGODB_URI is not set in environment variables.');
   }
 
+  // If readyState is 1 (connected), return immediately
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection;
+  }
+
   if (cached.conn) {
     return cached.conn;
   }
 
   if (!cached.promise) {
     const opts = {
-      bufferCommands: false, // Prevents hanging buffering timeouts in serverless
-      serverSelectionTimeoutMS: 10000
+      bufferCommands: false,
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 8000,
+      socketTimeoutMS: 20000
     };
 
     cached.promise = mongoose.connect(mongoURI, opts).then((mongooseInstance) => {

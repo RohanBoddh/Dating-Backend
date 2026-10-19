@@ -3,6 +3,7 @@ const router = express.Router();
 const Invitation = require('../models/Invitation');
 const restaurants = require('../config/restaurantsData');
 const { sendDateConfirmationEmail } = require('../services/emailService');
+const connectDB = require('../config/db');
 
 /**
  * Helper to sanitize user string
@@ -19,6 +20,7 @@ function sanitizeString(str, maxLength = 500) {
  */
 router.post('/', async (req, res, next) => {
   try {
+    await connectDB();
     const { restaurantId, date, timePreference, specialRequest } = req.body;
 
     // 1. Validate required fields
@@ -137,6 +139,7 @@ router.post('/', async (req, res, next) => {
  */
 router.get('/:id', async (req, res, next) => {
   try {
+    await connectDB();
     const { id } = req.params;
 
     // Search by custom invitationId (e.g. DATE-XXXXXX) or mongo _id
