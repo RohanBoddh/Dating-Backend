@@ -262,11 +262,12 @@ function generateEmailHtml(invitation) {
         </div>
       </div>
       <p style="text-align: center; color: #555; line-height: 1.6; font-size: 14px;">
-        Hit "Reply" on this email to write directly back to <strong>${senderName}</strong> (${senderEmail})! ✨
+      <p style="text-align: center; margin-top: 18px;">
+        <a href="https://dating-frontend-sepia.vercel.app" style="display: inline-block; background: #e91e63; color: #ffffff; text-decoration: none; padding: 10px 22px; border-radius: 25px; font-weight: bold; font-size: 14px;">Visit Dating Website 💖</a>
       </p>
     </div>
     <div class="footer">
-      Sent with <span class="heart-icon">❤️</span> from the <strong>Dating</strong> Web Application.
+      Sent with <span class="heart-icon">❤️</span> from the <a href="https://dating-frontend-sepia.vercel.app" style="color: #ff477e; text-decoration: none; font-weight: bold;">Dating</a> Web Application.
     </div>
   </div>
 </body>
@@ -299,7 +300,7 @@ async function sendDateConfirmationEmail(invitation) {
     replyTo: invitation.senderEmail ? `"${senderName}" <${invitation.senderEmail}>` : undefined,
     to: recipient,
     subject: `❤️ ${senderName} (${senderEmail}) Said YES! New Date Confirmed!`,
-    text: `${senderName} Said YES! 💖\n\nDate confirmation received on Dating Web App!\n\n👤 Real Name: ${senderName}\n📧 Email (Gmail): ${senderEmail}\n🎟️ Invitation ID: ${invitation.invitationId}\n🍽️ Restaurant/Vibe: ${invitation.restaurantName}\n📅 Date: ${formattedDate}\n⏰ Time Preference: ${invitation.timePreference || 'Evening Dinner'}\n💌 Special Request: ${invitation.specialRequest || 'None'}\n📌 Status: CONFIRMED ❤️\n`,
+    text: `${senderName} Said YES! 💖\n\nDate confirmation received on Dating Web App!\n\n👤 Real Name: ${senderName}\n📧 Email (Gmail): ${senderEmail}\n🎟️ Invitation ID: ${invitation.invitationId}\n🍽️ Restaurant/Vibe: ${invitation.restaurantName}\n📅 Date: ${formattedDate}\n⏰ Time Preference: ${invitation.timePreference || 'Evening Dinner'}\n💌 Special Request: ${invitation.specialRequest || 'None'}\n📌 Status: CONFIRMED ❤️\n\nLive Website: https://dating-frontend-sepia.vercel.app\n`,
     html: generateEmailHtml(invitation)
   };
 

@@ -2,6 +2,9 @@
 
 Romantic date proposal website backend powered by Node.js, Express, MongoDB Atlas, and Nodemailer.
 
+🔌 **Live API Endpoint:** [https://dating-backend-dusky.vercel.app](https://dating-backend-dusky.vercel.app)  
+🌐 **Frontend Website:** [https://dating-frontend-sepia.vercel.app](https://dating-frontend-sepia.vercel.app)
+
 ## Features
 - 💌 Date Invitation Creation & Persistence (MongoDB Atlas)
 - 📧 Live Gmail Confirmation Notifications (Nodemailer)
@@ -21,13 +24,7 @@ Configure these in your `.env` locally or in Vercel Project Settings > Environme
 | `SMTP_PASS` | 16-char Gmail App Password | `vqpmcngaqkllpepc` |
 | `NOTIFICATION_EMAIL` | Destination email | `rohanboddh9@gmail.com` |
 
-## Local Development
-```bash
-npm install
-node server.js
-```
-
 ## Vercel Deployment
-1. Import this repository in Vercel.
-2. Add the environment variables above in **Settings > Environment Variables**.
-3. Deploy!
+- **Project Name:** `dating-backend`
+- **Live URL:** [https://dating-backend-dusky.vercel.app](https://dating-backend-dusky.vercel.app)
+- **Health Check:** [https://dating-backend-dusky.vercel.app/api/health](https://dating-backend-dusky.vercel.app/api/health)
